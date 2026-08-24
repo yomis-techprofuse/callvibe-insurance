@@ -21,7 +21,7 @@ function NotFoundComponent() {
         <h1 className="text-6xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-lg font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-[13px] text-muted-foreground">
-          This screen isn&apos;t part of the Marhaba Intelligence demo.
+          This screen isn&apos;t part of the CallVibe demo.
         </p>
         <div className="mt-6">
           <Link
