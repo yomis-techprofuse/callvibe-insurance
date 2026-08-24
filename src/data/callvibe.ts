@@ -241,7 +241,7 @@ export type TranscriptTurn = {
   name: string;
   at: string;
   text: string;
-  tag?: string;
+  tag?: string | undefined;
 };
 
 export type Conversation = {
@@ -277,8 +277,8 @@ export type Conversation = {
   tags: string[];
   summary: string;
   recommendedAction: string;
-  claimStage?: string;
-  rootCause?: string;
+  claimStage?: string | undefined;
+  rootCause?: string | undefined;
   transcript: TranscriptTurn[];
   scores: { label: string; value: number }[];
   coaching: { title: string; body: string }[];
@@ -422,7 +422,7 @@ function makeTranscript(c: {
   competitor: string;
   objection: string;
 }): TranscriptTurn[] {
-  const lines: [TranscriptTurn["speaker"], string, string?][] = [
+  const lines: [TranscriptTurn["speaker"], string, (string | undefined)?][] = [
     ["agent", `Good morning, Harbour Insurance, this is ${c.agent.split(" ")[0]}. How can I help today?`],
     ["customer", `Hi, it's ${c.customer.split(" ")[0]}. I'm calling about my ${c.product.toLowerCase()} policy.`],
     ["agent", "Certainly — can I confirm a couple of security details before we continue?"],
