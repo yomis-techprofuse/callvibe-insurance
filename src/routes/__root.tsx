@@ -21,7 +21,7 @@ function NotFoundComponent() {
         <h1 className="text-6xl font-bold text-foreground">404</h1>
         <h2 className="mt-4 text-lg font-semibold text-foreground">Page not found</h2>
         <p className="mt-2 text-[13px] text-muted-foreground">
-          This screen isn&apos;t part of the Marhaba Intelligence demo.
+          This screen isn&apos;t part of the CallVibe demo.
         </p>
         <div className="mt-6">
           <Link
@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Marhaba Intelligence — Real Estate Sales Intelligence" },
+      { title: "CallVibe — Insurance Conversation Intelligence" },
       {
         name: "description",
         content:
-          "Marhaba Intelligence turns every Dubai buyer conversation into structured sales intelligence: demand, intent, objections, competitors and next actions.",
+          "CallVibe turns every Harbour Insurance customer conversation into structured intelligence: quotes, renewals, claims experience, complaint signals and next actions.",
       },
-      { name: "author", content: "Marhaba Developments" },
+      { name: "author", content: "Harbour Insurance Australia" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

@@ -108,7 +108,7 @@ function DashboardPage() {
               delta={k.delta}
               up={k.up}
               sub={k.sub}
-              tone={KPI_TONES[i]}
+              tone={KPI_TONES[i]!}
               icon={<Icon className="h-3.5 w-3.5" />}
             />
           );

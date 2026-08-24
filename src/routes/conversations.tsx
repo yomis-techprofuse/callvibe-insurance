@@ -11,7 +11,7 @@ import {
   Td,
   Th,
   sentimentTone,
-  type Tone,
+  riskTone,
 } from "@/components/mi/kit";
 import { FilterBar, Pagination, SearchBox, Select, TabBar } from "@/components/mi/controls";
 import { ConversationModal } from "@/components/mi/conversation-modal";
@@ -49,10 +49,6 @@ const TABS = [
   "Sales Opportunity",
   "Requires Review",
 ];
-
-export function riskTone(r: string): Tone {
-  return r === "Critical" ? "danger" : r === "High" ? "warning" : r === "Moderate" ? "info" : "success";
-}
 
 function ConversationsPage() {
   const [tab, setTab] = useState(TABS[0]!);
