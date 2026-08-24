@@ -106,6 +106,33 @@ export function sentimentTone(s: string): Tone {
   return s === "Positive" ? "success" : s === "Neutral" ? "warning" : "danger";
 }
 
+export function riskTone(r: string): Tone {
+  return r === "Critical" ? "danger" : r === "High" ? "warning" : r === "Moderate" ? "info" : "success";
+}
+
+export function severityTone(s: string): Tone {
+  return s === "Critical" ? "danger" : s === "High" ? "warning" : s === "Moderate" ? "info" : "neutral";
+}
+
+export function reviewTone(s: string): Tone {
+  switch (s) {
+    case "New":
+      return "warning";
+    case "Under Review":
+    case "In Progress":
+      return "info";
+    case "Confirmed":
+    case "Escalated":
+      return "danger";
+    case "Closed":
+    case "Completed":
+      return "success";
+    default:
+      return "neutral";
+  }
+}
+
+
 export function statusTone(s: string): Tone {
   switch (s) {
     case "Booking Ready":

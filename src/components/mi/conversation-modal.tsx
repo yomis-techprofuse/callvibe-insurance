@@ -22,12 +22,8 @@ import {
 } from "lucide-react";
 import type { Conversation } from "@/data/callvibe";
 import { TRANSCRIPT_TAGS, usd } from "@/data/callvibe";
-import { InsightCard, Panel, PanelHead, Pill, ScoreBar, sentimentTone, type Tone } from "./kit";
+import { InsightCard, Panel, PanelHead, Pill, ScoreBar, riskTone, sentimentTone, type Tone } from "./kit";
 import { cn } from "@/lib/utils";
-
-function riskTone(r: string): Tone {
-  return r === "Critical" ? "danger" : r === "High" ? "warning" : r === "Moderate" ? "info" : "success";
-}
 
 function tagTone(t: string): Tone {
   const s = t.toLowerCase();
