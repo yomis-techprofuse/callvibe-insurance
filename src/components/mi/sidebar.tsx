@@ -13,7 +13,14 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WORKSPACE } from "@/data/marhaba";
-import logoAsset from "@/assets/Techtar_FavIcon.png.asset.json";
+
+function LogoIcon() {
+  return (
+    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-[12px] font-bold tracking-tight text-primary-foreground">
+      MI
+    </span>
+  );
+}
 
 
 type NavDef = { to: string; label: string; icon: typeof Phone; exact?: boolean };
@@ -36,14 +43,13 @@ const secondary: NavDef[] = [
 function Wordmark() {
   return (
     <Link to="/" className="flex items-center gap-2.5 px-4 py-4">
-      <img src={logoAsset.url} alt="Marhaba Intelligence logo" className="h-8 w-8 shrink-0 rounded-md" />
+      <LogoIcon />
       <span className="leading-tight">
-        <span className="block text-[13.5px] font-semibold tracking-tight">Voice Intelligence</span>
+        <span className="block text-[13.5px] font-semibold tracking-tight">Marhaba Intelligence</span>
         <span className="block text-[10px] font-medium text-muted-foreground">Real Estate Sales Intelligence</span>
       </span>
     </Link>
   );
-
 }
 
 function NavItem({
