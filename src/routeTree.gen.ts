@@ -12,23 +12,15 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ActionItemsRouteImport } from './routes/action-items'
 import { Route as AgentIntelligenceRouteImport } from './routes/agent-intelligence'
-import { Route as AiInsightsRouteImport } from './routes/ai-insights'
-import { Route as BuyersRouteImport } from './routes/buyers'
-import { Route as CallsRouteImport } from './routes/calls'
 import { Route as ClaimsRouteImport } from './routes/claims'
 import { Route as ComplaintsRouteImport } from './routes/complaints'
 import { Route as ConversationsRouteImport } from './routes/conversations'
 import { Route as CustomersRouteImport } from './routes/customers'
 import { Route as ExecutiveIntelligenceRouteImport } from './routes/executive-intelligence'
-import { Route as MarketIntelligenceRouteImport } from './routes/market-intelligence'
 import { Route as ProductIntelligenceRouteImport } from './routes/product-intelligence'
 import { Route as QuotesRouteImport } from './routes/quotes'
 import { Route as RenewalsRouteImport } from './routes/renewals'
 import { Route as RiskReviewRouteImport } from './routes/risk-review'
-import { Route as SalesAdvisorsRouteImport } from './routes/sales-advisors'
-import { Route as WhatsappRouteImport } from './routes/whatsapp'
-import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
-import { Route as ProjectsIdRouteImport } from './routes/projects.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -43,21 +35,6 @@ const ActionItemsRoute = ActionItemsRouteImport.update({
 const AgentIntelligenceRoute = AgentIntelligenceRouteImport.update({
   id: '/agent-intelligence',
   path: '/agent-intelligence',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AiInsightsRoute = AiInsightsRouteImport.update({
-  id: '/ai-insights',
-  path: '/ai-insights',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BuyersRoute = BuyersRouteImport.update({
-  id: '/buyers',
-  path: '/buyers',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CallsRoute = CallsRouteImport.update({
-  id: '/calls',
-  path: '/calls',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClaimsRoute = ClaimsRouteImport.update({
@@ -85,11 +62,6 @@ const ExecutiveIntelligenceRoute = ExecutiveIntelligenceRouteImport.update({
   path: '/executive-intelligence',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MarketIntelligenceRoute = MarketIntelligenceRouteImport.update({
-  id: '/market-intelligence',
-  path: '/market-intelligence',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ProductIntelligenceRoute = ProductIntelligenceRouteImport.update({
   id: '/product-intelligence',
   path: '/product-intelligence',
@@ -110,93 +82,49 @@ const RiskReviewRoute = RiskReviewRouteImport.update({
   path: '/risk-review',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SalesAdvisorsRoute = SalesAdvisorsRouteImport.update({
-  id: '/sales-advisors',
-  path: '/sales-advisors',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const WhatsappRoute = WhatsappRouteImport.update({
-  id: '/whatsapp',
-  path: '/whatsapp',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
-  id: '/projects/',
-  path: '/projects/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProjectsIdRoute = ProjectsIdRouteImport.update({
-  id: '/projects/$id',
-  path: '/projects/$id',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/action-items': typeof ActionItemsRoute
   '/agent-intelligence': typeof AgentIntelligenceRoute
-  '/ai-insights': typeof AiInsightsRoute
-  '/buyers': typeof BuyersRoute
-  '/calls': typeof CallsRoute
   '/claims': typeof ClaimsRoute
   '/complaints': typeof ComplaintsRoute
   '/conversations': typeof ConversationsRoute
   '/customers': typeof CustomersRoute
   '/executive-intelligence': typeof ExecutiveIntelligenceRoute
-  '/market-intelligence': typeof MarketIntelligenceRoute
   '/product-intelligence': typeof ProductIntelligenceRoute
   '/quotes': typeof QuotesRoute
   '/renewals': typeof RenewalsRoute
   '/risk-review': typeof RiskReviewRoute
-  '/sales-advisors': typeof SalesAdvisorsRoute
-  '/whatsapp': typeof WhatsappRoute
-  '/projects/$id': typeof ProjectsIdRoute
-  '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/action-items': typeof ActionItemsRoute
   '/agent-intelligence': typeof AgentIntelligenceRoute
-  '/ai-insights': typeof AiInsightsRoute
-  '/buyers': typeof BuyersRoute
-  '/calls': typeof CallsRoute
   '/claims': typeof ClaimsRoute
   '/complaints': typeof ComplaintsRoute
   '/conversations': typeof ConversationsRoute
   '/customers': typeof CustomersRoute
   '/executive-intelligence': typeof ExecutiveIntelligenceRoute
-  '/market-intelligence': typeof MarketIntelligenceRoute
   '/product-intelligence': typeof ProductIntelligenceRoute
   '/quotes': typeof QuotesRoute
   '/renewals': typeof RenewalsRoute
   '/risk-review': typeof RiskReviewRoute
-  '/sales-advisors': typeof SalesAdvisorsRoute
-  '/whatsapp': typeof WhatsappRoute
-  '/projects/$id': typeof ProjectsIdRoute
-  '/projects': typeof ProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/action-items': typeof ActionItemsRoute
   '/agent-intelligence': typeof AgentIntelligenceRoute
-  '/ai-insights': typeof AiInsightsRoute
-  '/buyers': typeof BuyersRoute
-  '/calls': typeof CallsRoute
   '/claims': typeof ClaimsRoute
   '/complaints': typeof ComplaintsRoute
   '/conversations': typeof ConversationsRoute
   '/customers': typeof CustomersRoute
   '/executive-intelligence': typeof ExecutiveIntelligenceRoute
-  '/market-intelligence': typeof MarketIntelligenceRoute
   '/product-intelligence': typeof ProductIntelligenceRoute
   '/quotes': typeof QuotesRoute
   '/renewals': typeof RenewalsRoute
   '/risk-review': typeof RiskReviewRoute
-  '/sales-advisors': typeof SalesAdvisorsRoute
-  '/whatsapp': typeof WhatsappRoute
-  '/projects/$id': typeof ProjectsIdRoute
-  '/projects/': typeof ProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -204,90 +132,58 @@ export interface FileRouteTypes {
     | '/'
     | '/action-items'
     | '/agent-intelligence'
-    | '/ai-insights'
-    | '/buyers'
-    | '/calls'
     | '/claims'
     | '/complaints'
     | '/conversations'
     | '/customers'
     | '/executive-intelligence'
-    | '/market-intelligence'
     | '/product-intelligence'
     | '/quotes'
     | '/renewals'
     | '/risk-review'
-    | '/sales-advisors'
-    | '/whatsapp'
-    | '/projects/$id'
-    | '/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/action-items'
     | '/agent-intelligence'
-    | '/ai-insights'
-    | '/buyers'
-    | '/calls'
     | '/claims'
     | '/complaints'
     | '/conversations'
     | '/customers'
     | '/executive-intelligence'
-    | '/market-intelligence'
     | '/product-intelligence'
     | '/quotes'
     | '/renewals'
     | '/risk-review'
-    | '/sales-advisors'
-    | '/whatsapp'
-    | '/projects/$id'
-    | '/projects'
   id:
     | '__root__'
     | '/'
     | '/action-items'
     | '/agent-intelligence'
-    | '/ai-insights'
-    | '/buyers'
-    | '/calls'
     | '/claims'
     | '/complaints'
     | '/conversations'
     | '/customers'
     | '/executive-intelligence'
-    | '/market-intelligence'
     | '/product-intelligence'
     | '/quotes'
     | '/renewals'
     | '/risk-review'
-    | '/sales-advisors'
-    | '/whatsapp'
-    | '/projects/$id'
-    | '/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ActionItemsRoute: typeof ActionItemsRoute
   AgentIntelligenceRoute: typeof AgentIntelligenceRoute
-  AiInsightsRoute: typeof AiInsightsRoute
-  BuyersRoute: typeof BuyersRoute
-  CallsRoute: typeof CallsRoute
   ClaimsRoute: typeof ClaimsRoute
   ComplaintsRoute: typeof ComplaintsRoute
   ConversationsRoute: typeof ConversationsRoute
   CustomersRoute: typeof CustomersRoute
   ExecutiveIntelligenceRoute: typeof ExecutiveIntelligenceRoute
-  MarketIntelligenceRoute: typeof MarketIntelligenceRoute
   ProductIntelligenceRoute: typeof ProductIntelligenceRoute
   QuotesRoute: typeof QuotesRoute
   RenewalsRoute: typeof RenewalsRoute
   RiskReviewRoute: typeof RiskReviewRoute
-  SalesAdvisorsRoute: typeof SalesAdvisorsRoute
-  WhatsappRoute: typeof WhatsappRoute
-  ProjectsIdRoute: typeof ProjectsIdRoute
-  ProjectsIndexRoute: typeof ProjectsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -311,27 +207,6 @@ declare module '@tanstack/react-router' {
       path: '/agent-intelligence'
       fullPath: '/agent-intelligence'
       preLoaderRoute: typeof AgentIntelligenceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/ai-insights': {
-      id: '/ai-insights'
-      path: '/ai-insights'
-      fullPath: '/ai-insights'
-      preLoaderRoute: typeof AiInsightsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/buyers': {
-      id: '/buyers'
-      path: '/buyers'
-      fullPath: '/buyers'
-      preLoaderRoute: typeof BuyersRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/calls': {
-      id: '/calls'
-      path: '/calls'
-      fullPath: '/calls'
-      preLoaderRoute: typeof CallsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/claims': {
@@ -369,13 +244,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExecutiveIntelligenceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/market-intelligence': {
-      id: '/market-intelligence'
-      path: '/market-intelligence'
-      fullPath: '/market-intelligence'
-      preLoaderRoute: typeof MarketIntelligenceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/product-intelligence': {
       id: '/product-intelligence'
       path: '/product-intelligence'
@@ -404,34 +272,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RiskReviewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sales-advisors': {
-      id: '/sales-advisors'
-      path: '/sales-advisors'
-      fullPath: '/sales-advisors'
-      preLoaderRoute: typeof SalesAdvisorsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/whatsapp': {
-      id: '/whatsapp'
-      path: '/whatsapp'
-      fullPath: '/whatsapp'
-      preLoaderRoute: typeof WhatsappRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects/': {
-      id: '/projects/'
-      path: '/projects'
-      fullPath: '/projects/'
-      preLoaderRoute: typeof ProjectsIndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/projects/$id': {
-      id: '/projects/$id'
-      path: '/projects/$id'
-      fullPath: '/projects/$id'
-      preLoaderRoute: typeof ProjectsIdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
@@ -439,23 +279,15 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ActionItemsRoute: ActionItemsRoute,
   AgentIntelligenceRoute: AgentIntelligenceRoute,
-  AiInsightsRoute: AiInsightsRoute,
-  BuyersRoute: BuyersRoute,
-  CallsRoute: CallsRoute,
   ClaimsRoute: ClaimsRoute,
   ComplaintsRoute: ComplaintsRoute,
   ConversationsRoute: ConversationsRoute,
   CustomersRoute: CustomersRoute,
   ExecutiveIntelligenceRoute: ExecutiveIntelligenceRoute,
-  MarketIntelligenceRoute: MarketIntelligenceRoute,
   ProductIntelligenceRoute: ProductIntelligenceRoute,
   QuotesRoute: QuotesRoute,
   RenewalsRoute: RenewalsRoute,
   RiskReviewRoute: RiskReviewRoute,
-  SalesAdvisorsRoute: SalesAdvisorsRoute,
-  WhatsappRoute: WhatsappRoute,
-  ProjectsIdRoute: ProjectsIdRoute,
-  ProjectsIndexRoute: ProjectsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
