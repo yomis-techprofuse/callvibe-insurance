@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Marhaba Intelligence — Real Estate Sales Intelligence" },
+      { title: "CallVibe — Insurance Conversation Intelligence" },
       {
         name: "description",
         content:
-          "Marhaba Intelligence turns every Dubai buyer conversation into structured sales intelligence: demand, intent, objections, competitors and next actions.",
+          "CallVibe turns every Harbour Insurance customer conversation into structured intelligence: quotes, renewals, claims experience, complaint signals and next actions.",
       },
-      { name: "author", content: "Marhaba Developments" },
+      { name: "author", content: "Harbour Insurance Australia" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
