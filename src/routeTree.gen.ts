@@ -14,6 +14,7 @@ import { Route as ActionItemsRouteImport } from './routes/action-items'
 import { Route as AiInsightsRouteImport } from './routes/ai-insights'
 import { Route as BuyersRouteImport } from './routes/buyers'
 import { Route as CallsRouteImport } from './routes/calls'
+import { Route as ConversationsRouteImport } from './routes/conversations'
 import { Route as ExecutiveIntelligenceRouteImport } from './routes/executive-intelligence'
 import { Route as MarketIntelligenceRouteImport } from './routes/market-intelligence'
 import { Route as SalesAdvisorsRouteImport } from './routes/sales-advisors'
@@ -44,6 +45,11 @@ const BuyersRoute = BuyersRouteImport.update({
 const CallsRoute = CallsRouteImport.update({
   id: '/calls',
   path: '/calls',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConversationsRoute = ConversationsRouteImport.update({
+  id: '/conversations',
+  path: '/conversations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ExecutiveIntelligenceRoute = ExecutiveIntelligenceRouteImport.update({
@@ -83,6 +89,7 @@ export interface FileRoutesByFullPath {
   '/ai-insights': typeof AiInsightsRoute
   '/buyers': typeof BuyersRoute
   '/calls': typeof CallsRoute
+  '/conversations': typeof ConversationsRoute
   '/executive-intelligence': typeof ExecutiveIntelligenceRoute
   '/market-intelligence': typeof MarketIntelligenceRoute
   '/sales-advisors': typeof SalesAdvisorsRoute
@@ -96,6 +103,7 @@ export interface FileRoutesByTo {
   '/ai-insights': typeof AiInsightsRoute
   '/buyers': typeof BuyersRoute
   '/calls': typeof CallsRoute
+  '/conversations': typeof ConversationsRoute
   '/executive-intelligence': typeof ExecutiveIntelligenceRoute
   '/market-intelligence': typeof MarketIntelligenceRoute
   '/sales-advisors': typeof SalesAdvisorsRoute
@@ -110,6 +118,7 @@ export interface FileRoutesById {
   '/ai-insights': typeof AiInsightsRoute
   '/buyers': typeof BuyersRoute
   '/calls': typeof CallsRoute
+  '/conversations': typeof ConversationsRoute
   '/executive-intelligence': typeof ExecutiveIntelligenceRoute
   '/market-intelligence': typeof MarketIntelligenceRoute
   '/sales-advisors': typeof SalesAdvisorsRoute
@@ -125,6 +134,7 @@ export interface FileRouteTypes {
     | '/ai-insights'
     | '/buyers'
     | '/calls'
+    | '/conversations'
     | '/executive-intelligence'
     | '/market-intelligence'
     | '/sales-advisors'
@@ -138,6 +148,7 @@ export interface FileRouteTypes {
     | '/ai-insights'
     | '/buyers'
     | '/calls'
+    | '/conversations'
     | '/executive-intelligence'
     | '/market-intelligence'
     | '/sales-advisors'
@@ -151,6 +162,7 @@ export interface FileRouteTypes {
     | '/ai-insights'
     | '/buyers'
     | '/calls'
+    | '/conversations'
     | '/executive-intelligence'
     | '/market-intelligence'
     | '/sales-advisors'
@@ -165,6 +177,7 @@ export interface RootRouteChildren {
   AiInsightsRoute: typeof AiInsightsRoute
   BuyersRoute: typeof BuyersRoute
   CallsRoute: typeof CallsRoute
+  ConversationsRoute: typeof ConversationsRoute
   ExecutiveIntelligenceRoute: typeof ExecutiveIntelligenceRoute
   MarketIntelligenceRoute: typeof MarketIntelligenceRoute
   SalesAdvisorsRoute: typeof SalesAdvisorsRoute
@@ -208,6 +221,13 @@ declare module '@tanstack/react-router' {
       path: '/calls'
       fullPath: '/calls'
       preLoaderRoute: typeof CallsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/conversations': {
+      id: '/conversations'
+      path: '/conversations'
+      fullPath: '/conversations'
+      preLoaderRoute: typeof ConversationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/executive-intelligence': {
@@ -261,6 +281,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiInsightsRoute: AiInsightsRoute,
   BuyersRoute: BuyersRoute,
   CallsRoute: CallsRoute,
+  ConversationsRoute: ConversationsRoute,
   ExecutiveIntelligenceRoute: ExecutiveIntelligenceRoute,
   MarketIntelligenceRoute: MarketIntelligenceRoute,
   SalesAdvisorsRoute: SalesAdvisorsRoute,
