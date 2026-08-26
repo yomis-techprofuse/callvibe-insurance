@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useRouterState } from "@tanstack/react-router";
-import { Bell, CalendarDays, Loader2, RefreshCw, Search } from "lucide-react";
+import { Bell, CalendarDays, LogOut, Loader2, RefreshCw, Search } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { AskCallVibe } from "./ask-callvibe";
+import { AUTH_KEY } from "@/lib/auth-storage";
 
 const titles: { match: (p: string) => boolean; title: string; subtitle: string }[] = [
   {
@@ -136,6 +137,17 @@ export function TopBar() {
         >
           HO
         </span>
+
+        <button
+          onClick={() => {
+            localStorage.removeItem(AUTH_KEY);
+            window.location.reload();
+          }}
+          title="Log out"
+          className="flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-card text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+        >
+          <LogOut className="h-3.5 w-3.5" />
+        </button>
       </div>
 
       <AskCallVibe open={askOpen} onClose={() => setAskOpen(false)} />

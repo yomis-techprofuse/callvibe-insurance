@@ -7,12 +7,111 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useLayoutEffect, useState, type FormEvent, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Sidebar } from "../components/mi/sidebar";
 import { TopBar } from "../components/mi/topbar";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { AUTH_KEY } from "../lib/auth-storage";
+
+// Single hardcoded credential pair, checked client-side only. This is a
+// lightweight access gate for a temporary client demo, not real auth — the
+// password is visible in the browser's JS bundle to anyone who looks.
+const CREDENTIALS = { email: "makam@techtar.io", password: "D@m0TecH" };
+
+function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (email === CREDENTIALS.email && password === CREDENTIALS.password) {
+      localStorage.setItem(AUTH_KEY, "1");
+      onSuccess();
+    } else {
+      setError("Invalid email or password.");
+    }
+  };
+
+  return (
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas px-4">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-[-12rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
+      />
+
+      <div className="relative w-full max-w-sm">
+        <div className="mb-6 flex flex-col items-center text-center">
+          <img
+            src={`${import.meta.env.BASE_URL}favicon.png`}
+            alt="CallVibe logo"
+            className="mb-3 h-12 w-12 rounded-xl shadow-sm"
+          />
+          <span className="text-[15px] font-semibold tracking-tight text-foreground">CallVibe</span>
+          <span className="text-[11.5px] font-medium text-muted-foreground">
+            Insurance Conversation Intelligence
+          </span>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          className="w-full rounded-xl border border-border bg-background p-8 shadow-sm"
+        >
+          <h1 className="mb-6 text-lg font-semibold text-foreground">Sign in</h1>
+
+          {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
+
+          <div className="mb-4 space-y-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-6 space-y-1.5">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <Button type="submit" className="w-full">
+            Sign in
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function LoginGate({ children }: { children: ReactNode }) {
+  const [authed, setAuthed] = useState(false);
+
+  // Runs client-only, before paint — avoids a hydration mismatch (server
+  // always renders unauthenticated) while still avoiding a visible flash
+  // for a returning, already-authenticated visitor.
+  useLayoutEffect(() => {
+    if (localStorage.getItem(AUTH_KEY) === "1") setAuthed(true);
+  }, []);
+
+  if (!authed) return <LoginForm onSuccess={() => setAuthed(true)} />;
+  return <>{children}</>;
+}
 
 function NotFoundComponent() {
   return (
@@ -123,16 +222,18 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-canvas">
-        <Sidebar />
-        <div className="pl-[240px]">
-          <TopBar />
-          <main className="px-6 py-5">
-            {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-            <Outlet />
-          </main>
+      <LoginGate>
+        <div className="min-h-screen bg-canvas">
+          <Sidebar />
+          <div className="pl-[240px]">
+            <TopBar />
+            <main className="px-6 py-5">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+          </div>
         </div>
-      </div>
+      </LoginGate>
     </QueryClientProvider>
   );
 }

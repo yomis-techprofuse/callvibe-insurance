@@ -20,9 +20,11 @@ import { WORKSPACE } from "@/data/callvibe";
 
 function LogoIcon() {
   return (
-    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-[12px] font-bold tracking-tight text-primary-foreground">
-      CV
-    </span>
+    <img
+      src={`${import.meta.env.BASE_URL}favicon.png`}
+      alt="CallVibe logo"
+      className="h-8 w-8 shrink-0 rounded-lg"
+    />
   );
 }
 
