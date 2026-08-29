@@ -16,7 +16,8 @@ import { TopBar } from "../components/mi/topbar";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
-import { AUTH_KEY } from "../lib/auth-storage";
+import { AUTH_KEY, LEAD_KEY } from "../lib/auth-storage";
+import { submitLead } from "../lib/lead-form";
 
 // Single hardcoded credential pair, checked client-side only. This is a
 // lightweight access gate for a temporary client demo, not real auth — the
@@ -97,16 +98,130 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   );
 }
 
+function LeadForm({ onSuccess }: { onSuccess: () => void }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [company, setCompany] = useState("");
+  const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const trimmedName = name.trim();
+    const trimmedCompany = company.trim();
+    const digitsOnly = phone.replace(/\D/g, "");
+
+    if (trimmedName.length < 2) {
+      setError("Please enter your full name.");
+      return;
+    }
+    if (digitsOnly.length < 7) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+    if (trimmedCompany.length < 2) {
+      setError("Please enter your company name.");
+      return;
+    }
+
+    setError("");
+    setPending(true);
+    await submitLead({ name: trimmedName, email: email.trim(), phone: phone.trim(), company: trimmedCompany });
+    localStorage.setItem(LEAD_KEY, "1");
+    setPending(false);
+    onSuccess();
+  };
+
+  return (
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas px-4">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-[-12rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
+      />
+
+      <div className="relative w-full max-w-sm">
+        <div className="mb-6 flex flex-col items-center text-center">
+          <img
+            src={`${import.meta.env.BASE_URL}favicon.png`}
+            alt="GT Holidays logo"
+            className="mb-3 h-12 w-12 rounded-xl shadow-sm"
+          />
+          <span className="text-[15px] font-semibold tracking-tight text-foreground">GT Holidays</span>
+          <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          className="w-full rounded-xl border border-border bg-background p-8 shadow-sm"
+        >
+          <h1 className="mb-1 text-lg font-semibold text-foreground">Request access</h1>
+          <p className="mb-6 text-sm text-muted-foreground">Tell us a bit about yourself to continue.</p>
+
+          {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
+
+          <div className="mb-4 space-y-1.5">
+            <Label htmlFor="lead-name">Name</Label>
+            <Input id="lead-name" required value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+
+          <div className="mb-4 space-y-1.5">
+            <Label htmlFor="lead-email">Email</Label>
+            <Input
+              id="lead-email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-4 space-y-1.5">
+            <Label htmlFor="lead-phone">Phone</Label>
+            <Input
+              id="lead-phone"
+              type="tel"
+              autoComplete="tel"
+              required
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-6 space-y-1.5">
+            <Label htmlFor="lead-company">Company</Label>
+            <Input
+              id="lead-company"
+              required
+              value={company}
+              onChange={(e) => setCompany(e.target.value)}
+            />
+          </div>
+
+          <Button type="submit" disabled={pending} className="w-full">
+            {pending ? "Submitting…" : "Continue"}
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
 function LoginGate({ children }: { children: ReactNode }) {
+  const [leadCaptured, setLeadCaptured] = useState(false);
   const [authed, setAuthed] = useState(false);
 
   // Runs client-only, before paint — avoids a hydration mismatch (server
   // always renders unauthenticated) while still avoiding a visible flash
   // for a returning, already-authenticated visitor.
   useLayoutEffect(() => {
+    if (localStorage.getItem(LEAD_KEY) === "1") setLeadCaptured(true);
     if (localStorage.getItem(AUTH_KEY) === "1") setAuthed(true);
   }, []);
 
+  if (!leadCaptured) return <LeadForm onSuccess={() => setLeadCaptured(true)} />;
   if (!authed) return <LoginForm onSuccess={() => setAuthed(true)} />;
   return <>{children}</>;
 }

@@ -18,7 +18,7 @@ const ENTRIES = {
 
 // Tags which app this submission came from, so rows from different demos
 // sharing this one Sheet can be told apart.
-const SOURCE = "CallVibe Insurance";
+const SOURCE = "GT Holidays";
 
 export async function submitLead(data: { name: string; email: string; phone: string; company: string }) {
   const body = new URLSearchParams();
