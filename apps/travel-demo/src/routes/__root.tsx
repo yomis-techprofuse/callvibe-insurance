@@ -47,15 +47,7 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
       />
 
       <div className="relative w-full max-w-sm">
-        <div className="mb-6 flex flex-col items-center text-center">
-          <img
-            src={`${import.meta.env.BASE_URL}favicon.png`}
-            alt="GT Holidays logo"
-            className="mb-3 h-12 w-12 rounded-xl shadow-sm"
-          />
-          <span className="text-[15px] font-semibold tracking-tight text-foreground">CallVibe</span>
-          <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
-        </div>
+        <BrandHeader />
 
         <form
           onSubmit={onSubmit}
@@ -98,6 +90,20 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   );
 }
 
+function BrandHeader() {
+  return (
+    <div className="mb-6 flex flex-col items-center text-center">
+      <img
+        src={`${import.meta.env.BASE_URL}favicon.png`}
+        alt="CallVibe logo"
+        className="mb-3 h-12 w-12 rounded-xl shadow-sm"
+      />
+      <span className="text-[15px] font-semibold tracking-tight text-foreground">CallVibe</span>
+      <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
+    </div>
+  );
+}
+
 function LeadForm({ onSuccess }: { onSuccess: () => void }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -105,6 +111,7 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
   const [company, setCompany] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -129,10 +136,33 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
     setError("");
     setPending(true);
     await submitLead({ name: trimmedName, email: email.trim(), phone: phone.trim(), company: trimmedCompany });
-    localStorage.setItem(LEAD_KEY, "1");
     setPending(false);
-    onSuccess();
+    setSubmitted(true);
   };
+
+  if (submitted) {
+    return (
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas px-4">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute top-[-12rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
+        />
+        <div className="relative w-full max-w-sm">
+          <BrandHeader />
+          <div className="w-full rounded-xl border border-border bg-background p-8 text-center shadow-sm">
+            <h1 className="mb-2 text-lg font-semibold text-foreground">Request received</h1>
+            <p className="mb-6 text-sm text-muted-foreground">
+              A confirmation email has been sent to you. We&apos;ll be in touch shortly with your login
+              credentials.
+            </p>
+            <Button onClick={onSuccess} className="w-full">
+              Continue to sign in
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas px-4">
@@ -142,15 +172,7 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
       />
 
       <div className="relative w-full max-w-sm">
-        <div className="mb-6 flex flex-col items-center text-center">
-          <img
-            src={`${import.meta.env.BASE_URL}favicon.png`}
-            alt="GT Holidays logo"
-            className="mb-3 h-12 w-12 rounded-xl shadow-sm"
-          />
-          <span className="text-[15px] font-semibold tracking-tight text-foreground">CallVibe</span>
-          <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
-        </div>
+        <BrandHeader />
 
         <form
           onSubmit={onSubmit}
@@ -203,6 +225,14 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
           <Button type="submit" disabled={pending} className="w-full">
             {pending ? "Submitting…" : "Continue"}
           </Button>
+
+          <button
+            type="button"
+            onClick={onSuccess}
+            className="mt-4 w-full text-center text-sm text-muted-foreground underline-offset-2 hover:text-foreground hover:underline"
+          >
+            Already have credentials? Sign in
+          </button>
         </form>
       </div>
     </div>
@@ -221,7 +251,12 @@ function LoginGate({ children }: { children: ReactNode }) {
     if (localStorage.getItem(AUTH_KEY) === "1") setAuthed(true);
   }, []);
 
-  if (!leadCaptured) return <LeadForm onSuccess={() => setLeadCaptured(true)} />;
+  const markLeadCaptured = () => {
+    localStorage.setItem(LEAD_KEY, "1");
+    setLeadCaptured(true);
+  };
+
+  if (!leadCaptured) return <LeadForm onSuccess={markLeadCaptured} />;
   if (!authed) return <LoginForm onSuccess={() => setAuthed(true)} />;
   return <>{children}</>;
 }
