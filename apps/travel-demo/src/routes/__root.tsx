@@ -22,7 +22,7 @@ import { submitLead } from "../lib/lead-form";
 // Single hardcoded credential pair, checked client-side only. This is a
 // lightweight access gate for a temporary client demo, not real auth — the
 // password is visible in the browser's JS bundle to anyone who looks.
-const CREDENTIALS = { email: "makam@techtar.io", password: "D@m0TecH" };
+const CREDENTIALS = { email: "Demo@callvibe.ai", password: "Demo@123" };
 
 function LoginForm({ onSuccess }: { onSuccess: () => void }) {
   const [email, setEmail] = useState("");
