@@ -53,7 +53,7 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
             alt="GT Holidays logo"
             className="mb-3 h-12 w-12 rounded-xl shadow-sm"
           />
-          <span className="text-[15px] font-semibold tracking-tight text-foreground">GT Holidays</span>
+          <span className="text-[15px] font-semibold tracking-tight text-foreground">CallVibe</span>
           <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
         </div>
 
@@ -148,7 +148,7 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
             alt="GT Holidays logo"
             className="mb-3 h-12 w-12 rounded-xl shadow-sm"
           />
-          <span className="text-[15px] font-semibold tracking-tight text-foreground">GT Holidays</span>
+          <span className="text-[15px] font-semibold tracking-tight text-foreground">CallVibe</span>
           <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
         </div>
 
