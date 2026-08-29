@@ -1,0 +1,237 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {
+  Outlet,
+  Link,
+  createRootRouteWithContext,
+  useRouter,
+  HeadContent,
+  Scripts,
+} from "@tanstack/react-router";
+import { useEffect, useLayoutEffect, useState, type FormEvent, type ReactNode } from "react";
+
+import appCss from "../styles.css?url";
+import { reportLovableError } from "../lib/lovable-error-reporting";
+import { Sidebar } from "../components/mi/sidebar";
+import { TopBar } from "../components/mi/topbar";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Label } from "../components/ui/label";
+import { AUTH_KEY } from "../lib/auth-storage";
+
+// Single hardcoded credential pair, checked client-side only. This is a
+// lightweight access gate for a temporary client demo, not real auth — the
+// password is visible in the browser's JS bundle to anyone who looks.
+const CREDENTIALS = { email: "makam@techtar.io", password: "D@m0TecH" };
+
+function LoginForm({ onSuccess }: { onSuccess: () => void }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    if (email === CREDENTIALS.email && password === CREDENTIALS.password) {
+      localStorage.setItem(AUTH_KEY, "1");
+      onSuccess();
+    } else {
+      setError("Invalid email or password.");
+    }
+  };
+
+  return (
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-canvas px-4">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute top-[-12rem] left-1/2 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/15 blur-3xl"
+      />
+
+      <div className="relative w-full max-w-sm">
+        <div className="mb-6 flex flex-col items-center text-center">
+          <img
+            src={`${import.meta.env.BASE_URL}favicon.png`}
+            alt="GT Holidays logo"
+            className="mb-3 h-12 w-12 rounded-xl shadow-sm"
+          />
+          <span className="text-[15px] font-semibold tracking-tight text-foreground">GT Holidays</span>
+          <span className="text-[11.5px] font-medium text-muted-foreground">Travel Sales Intelligence</span>
+        </div>
+
+        <form
+          onSubmit={onSubmit}
+          className="w-full rounded-xl border border-border bg-background p-8 shadow-sm"
+        >
+          <h1 className="mb-6 text-lg font-semibold text-foreground">Sign in</h1>
+
+          {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
+
+          <div className="mb-4 space-y-1.5">
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              autoComplete="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-6 space-y-1.5">
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <Button type="submit" className="w-full">
+            Sign in
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function LoginGate({ children }: { children: ReactNode }) {
+  const [authed, setAuthed] = useState(false);
+
+  // Runs client-only, before paint — avoids a hydration mismatch (server
+  // always renders unauthenticated) while still avoiding a visible flash
+  // for a returning, already-authenticated visitor.
+  useLayoutEffect(() => {
+    if (localStorage.getItem(AUTH_KEY) === "1") setAuthed(true);
+  }, []);
+
+  if (!authed) return <LoginForm onSuccess={() => setAuthed(true)} />;
+  return <>{children}</>;
+}
+
+function NotFoundComponent() {
+  return (
+    <div className="flex min-h-[70vh] items-center justify-center px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-6xl font-bold text-foreground">404</h1>
+        <h2 className="mt-4 text-lg font-semibold text-foreground">Page not found</h2>
+        <p className="mt-2 text-[13px] text-muted-foreground">
+          This screen isn&apos;t part of the CallVibe demo.
+        </p>
+        <div className="mt-6">
+          <Link
+            to="/"
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-[13px] font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Back to dashboard
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
+  console.error(error);
+  const router = useRouter();
+  useEffect(() => {
+    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+  }, [error]);
+
+  return (
+    <div className="flex min-h-[70vh] items-center justify-center px-4">
+      <div className="max-w-md text-center">
+        <h1 className="text-lg font-semibold tracking-tight text-foreground">This page didn&apos;t load</h1>
+        <p className="mt-2 text-[13px] text-muted-foreground">
+          Something went wrong. You can try refreshing or head back to the dashboard.
+        </p>
+        <div className="mt-6 flex flex-wrap justify-center gap-2">
+          <button
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
+            className="inline-flex items-center justify-center rounded-md bg-primary px-4 py-2 text-[13px] font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          >
+            Try again
+          </button>
+          <a
+            href="/"
+            className="inline-flex items-center justify-center rounded-md border border-input bg-card px-4 py-2 text-[13px] font-medium text-foreground transition-colors hover:bg-muted"
+          >
+            Go home
+          </a>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
+  head: () => ({
+    meta: [
+      { charSet: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { title: "CallVibe for GT Holidays" },
+      {
+        name: "description",
+        content:
+          "CallVibe turns every GT Holidays holiday enquiry into structured sales intelligence: destination demand, traveller intent, objections, competitors and next actions.",
+      },
+      { name: "author", content: "GT Holidays" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "stylesheet", href: appCss },
+      { rel: "preconnect", href: "https://fonts.googleapis.com" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap",
+      },
+      { rel: "icon", href: `${import.meta.env.BASE_URL}favicon.png`, type: "image/png" },
+    ],
+  }),
+  shellComponent: RootShell,
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+  errorComponent: ErrorComponent,
+});
+
+function RootShell({ children }: { children: ReactNode }) {
+  return (
+    <html lang="en">
+      <head>
+        <HeadContent />
+      </head>
+      <body>
+        {children}
+        <Scripts />
+      </body>
+    </html>
+  );
+}
+
+function RootComponent() {
+  const { queryClient } = Route.useRouteContext();
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <LoginGate>
+        <div className="min-h-screen bg-canvas">
+          <Sidebar />
+          <div className="pl-[240px]">
+            <TopBar />
+            <main className="px-6 py-5">
+              {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+              <Outlet />
+            </main>
+          </div>
+        </div>
+      </LoginGate>
+    </QueryClientProvider>
+  );
+}
