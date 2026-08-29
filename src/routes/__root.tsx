@@ -106,11 +106,31 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
   const [phone, setPhone] = useState("");
   const [company, setCompany] = useState("");
   const [pending, setPending] = useState(false);
+  const [error, setError] = useState("");
 
   const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    const trimmedName = name.trim();
+    const trimmedCompany = company.trim();
+    const digitsOnly = phone.replace(/\D/g, "");
+
+    if (trimmedName.length < 2) {
+      setError("Please enter your full name.");
+      return;
+    }
+    if (digitsOnly.length < 7) {
+      setError("Please enter a valid phone number.");
+      return;
+    }
+    if (trimmedCompany.length < 2) {
+      setError("Please enter your company name.");
+      return;
+    }
+
+    setError("");
     setPending(true);
-    await submitLead({ name, email, phone, company });
+    await submitLead({ name: trimmedName, email: email.trim(), phone: phone.trim(), company: trimmedCompany });
     localStorage.setItem(LEAD_KEY, "1");
     setPending(false);
     onSuccess();
@@ -142,6 +162,8 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
         >
           <h1 className="mb-1 text-lg font-semibold text-foreground">Request access</h1>
           <p className="mb-6 text-sm text-muted-foreground">Tell us a bit about yourself to continue.</p>
+
+          {error && <p className="mb-4 text-sm text-destructive">{error}</p>}
 
           <div className="mb-4 space-y-1.5">
             <Label htmlFor="lead-name">Name</Label>
