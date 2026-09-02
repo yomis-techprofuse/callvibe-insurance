@@ -152,8 +152,7 @@ function LeadForm({ onSuccess }: { onSuccess: () => void }) {
           <div className="w-full rounded-xl border border-border bg-background p-8 text-center shadow-sm">
             <h1 className="mb-2 text-lg font-semibold text-foreground">Request received</h1>
             <p className="mb-6 text-sm text-muted-foreground">
-              A confirmation email has been sent to you. We&apos;ll be in touch shortly with your login
-              credentials.
+              Your login credentials have been sent to your email.
             </p>
             <Button onClick={onSuccess} className="w-full">
               Continue to sign in
