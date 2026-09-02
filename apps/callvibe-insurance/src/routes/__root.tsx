@@ -31,7 +31,7 @@ function LoginForm({ onSuccess }: { onSuccess: () => void }) {
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    if (email === CREDENTIALS.email && password === CREDENTIALS.password) {
+    if (email.trim().toLowerCase() === CREDENTIALS.email.toLowerCase() && password === CREDENTIALS.password) {
       localStorage.setItem(AUTH_KEY, "1");
       onSuccess();
     } else {
