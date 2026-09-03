@@ -1,8 +1,9 @@
 // Builds each app in apps/* independently (each is a full standalone TanStack Start app,
 // each producing its own Vercel Build Output API v3 output), then merges the outputs into
 // a single top-level `.vercel/output` so this repo deploys as ONE Vercel project:
-//   /                  -> apps/callvibe-insurance (root, no prefix)
+//   /insurance/demo    -> apps/callvibe-insurance
 //   /travels/demo      -> apps/travel-demo
+// The bare domain root ("/") is intentionally unmatched and 404s.
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -12,7 +13,7 @@ const OUT = join(ROOT, ".vercel", "output");
 
 // segments: [] means this app is mounted at the domain root, with no path prefix.
 const apps = [
-  { slug: "callvibe-insurance", segments: [] },
+  { slug: "callvibe-insurance", segments: ["insurance", "demo"] },
   { slug: "travel-demo", segments: ["travels", "demo"] },
 ];
 
@@ -71,15 +72,11 @@ for (const app of apps) {
   }
 }
 
-if (!rootApp) {
-  throw new Error("[build] No app with empty segments (root mount) was configured.");
-}
-
 const routes = [
   ...assetRoutes,
   { handle: "filesystem" },
   ...destRoutes,
-  { src: "^/.*$", dest: `/${rootApp.slug}` },
+  ...(rootApp ? [{ src: "^/.*$", dest: `/${rootApp.slug}` }] : []),
 ];
 
 writeFileSync(join(OUT, "config.json"), JSON.stringify({ version: 3, routes }, null, 2));
