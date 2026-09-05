@@ -24,7 +24,7 @@ export function IntelligenceSearch() {
         className="hidden h-8 w-[300px] items-center gap-2 rounded-lg border border-border bg-muted/40 px-2.5 text-left text-[12px] text-muted-foreground transition-colors hover:bg-muted lg:flex"
       >
         <Search className="h-3.5 w-3.5 shrink-0" />
-        <span className="truncate">Ask TechTar about your applicant conversations...</span>
+        <span className="truncate">Ask CallVibe about your applicant conversations...</span>
       </button>
 
       {open ? (
@@ -39,7 +39,7 @@ export function IntelligenceSearch() {
                   setQuery(e.target.value);
                   setAnswer(null);
                 }}
-                placeholder="Ask TechTar about your applicant conversations..."
+                placeholder="Ask CallVibe about your applicant conversations..."
                 className="min-w-0 flex-1 bg-transparent text-[13px] outline-none placeholder:text-muted-foreground"
               />
               <button onClick={() => setOpen(false)} className="rounded-md p-1 text-muted-foreground hover:bg-muted">

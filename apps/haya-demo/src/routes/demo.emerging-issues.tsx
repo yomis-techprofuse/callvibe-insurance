@@ -5,9 +5,9 @@ import { PageHead, DemoBadge } from "@/components/mi/ui";
 export const Route = createFileRoute("/demo/emerging-issues")({
   head: () => ({
     meta: [
-      { title: "Emerging Issues — TechTar Intelligence" },
+      { title: "Emerging Issues — CallVibe" },
       { name: "description", content: "Early detection of new and accelerating applicant contact patterns across Hayya support conversations." },
-      { property: "og:title", content: "Emerging Issues — TechTar Intelligence" },
+      { property: "og:title", content: "Emerging Issues — CallVibe" },
       { property: "og:description", content: "Trend detection across simulated Hayya applicant support conversations." },
     ],
   }),

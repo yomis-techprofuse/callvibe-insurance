@@ -21,10 +21,10 @@ export const Route = createFileRoute("/demo/conversations/$id")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Conversation unavailable — TechTar Intelligence" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Conversation unavailable — CallVibe" }, { name: "robots", content: "noindex" }] };
     }
     const c = loaderData.conversation;
-    const title = `${c.id} — Conversation Intelligence | TechTar Intelligence`;
+    const title = `${c.id} — Conversation Intelligence | CallVibe`;
     const description = `${c.driver} · ${c.subDriver} · ${c.resolution}. Transcript, intelligence signals, root cause and QA scorecard for a simulated applicant conversation.`;
     return {
       meta: [

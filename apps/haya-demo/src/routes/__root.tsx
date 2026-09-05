@@ -75,13 +75,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TechTar Intelligence — Hayya Applicant Support" },
+      { title: "CallVibe — Hayya Applicant Support" },
       {
         name: "description",
         content:
-          "TechTar Intelligence turns every Hayya applicant support conversation into structured intelligence: contact drivers, resolution, repeat demand and emerging issues.",
+          "CallVibe turns every Hayya applicant support conversation into structured intelligence: contact drivers, resolution, repeat demand and emerging issues.",
       },
-      { name: "author", content: "TechTar" },
+      { name: "author", content: "CallVibe" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],

@@ -11,8 +11,8 @@ export const Route = createFileRoute("/demo/markets/$id")({
     return { market };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Market unavailable — TechTar Intelligence" }, { name: "robots", content: "noindex" }] };
-    const t = `${loaderData.market.name} Applicant Support Intelligence — TechTar`;
+    if (!loaderData) return { meta: [{ title: "Market unavailable — CallVibe" }, { name: "robots", content: "noindex" }] };
+    const t = `${loaderData.market.name} Applicant Support Intelligence — CallVibe`;
     return {
       meta: [
         { title: t },
@@ -132,7 +132,7 @@ function MarketPage() {
         </div>
       </Panel>
 
-      <InsightBanner label="TechTar Insight — Simulated Demo Insight" body={m.insight}>
+      <InsightBanner label="CallVibe Insight — Simulated Demo Insight" body={m.insight}>
         <Link to="/demo/resolution" className="inline-flex items-center gap-1 text-[12px] font-semibold text-primary hover:underline">
           Investigate Root Causes <ArrowRight className="h-3.5 w-3.5" />
         </Link>

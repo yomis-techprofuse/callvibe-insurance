@@ -21,9 +21,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/demo/applicant-intelligence")({
   head: () => ({
     meta: [
-      { title: "Applicant Intelligence — TechTar Intelligence" },
+      { title: "Applicant Intelligence — CallVibe" },
       { name: "description", content: "What applicants are actually saying: top concerns, highest-effort journeys, repeat-contact journeys and the fastest growing contact reasons." },
-      { property: "og:title", content: "Applicant Intelligence — TechTar Intelligence" },
+      { property: "og:title", content: "Applicant Intelligence — CallVibe" },
       { property: "og:description", content: "Voice of the applicant across Hayya support conversations. Simulated demo data." },
     ],
   }),
@@ -164,7 +164,7 @@ function IndiaView() {
         </Panel>
 
         <Panel>
-          <PanelHead title="Multilingual Coverage" subtitle="Configurable language support in TechTar" />
+          <PanelHead title="Multilingual Coverage" subtitle="Configurable language support in CallVibe" />
           <div className="p-4">
             <p className="text-[12.5px] leading-[1.6] text-muted-foreground">
               This demonstration classifies conversations across English, Hindi, Malayalam, Tamil and Arabic. Classification quality varies by

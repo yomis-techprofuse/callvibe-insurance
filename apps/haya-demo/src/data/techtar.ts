@@ -1,10 +1,10 @@
 /**
- * TechTar Intelligence — Hayya Applicant Support
+ * CallVibe — Hayya Applicant Support
  * ALL DATA IN THIS FILE IS SIMULATED / ILLUSTRATIVE DEMO DATA.
  * No real applicant, agent or operational data is represented.
  */
 
-export const PRODUCT = "TechTar Intelligence";
+export const PRODUCT = "CallVibe";
 export const CONFIG_LABEL = "Hayya Applicant Support";
 export const DESCRIPTOR = "Conversation Intelligence for Applicant Support";
 

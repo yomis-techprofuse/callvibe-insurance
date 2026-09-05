@@ -7,9 +7,9 @@ import { drivers } from "@/data/techtar";
 export const Route = createFileRoute("/demo/contact-drivers/")({
   head: () => ({
     meta: [
-      { title: "Contact Drivers — TechTar Intelligence" },
+      { title: "Contact Drivers — CallVibe" },
       { name: "description", content: "Why applicants are contacting Hayya: contact-driver share, FCR, repeat contact and escalation across the applicant support queue." },
-      { property: "og:title", content: "Contact Drivers — TechTar Intelligence" },
+      { property: "og:title", content: "Contact Drivers — CallVibe" },
       { property: "og:description", content: "Contact-driver analysis with root causes for Hayya applicant support. Simulated demo data." },
     ],
   }),

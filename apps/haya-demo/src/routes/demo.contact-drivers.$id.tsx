@@ -12,9 +12,9 @@ export const Route = createFileRoute("/demo/contact-drivers/$id")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Driver unavailable — TechTar Intelligence" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Driver unavailable — CallVibe" }, { name: "robots", content: "noindex" }] };
     }
-    const title = `${loaderData.driver.name} — Root Cause Analysis | TechTar Intelligence`;
+    const title = `${loaderData.driver.name} — Root Cause Analysis | CallVibe`;
     const description = `Root-cause analysis, sub-drivers, resolution and repeat-contact behaviour for ${loaderData.driver.name} conversations.`;
     return {
       meta: [

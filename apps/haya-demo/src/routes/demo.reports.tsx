@@ -5,9 +5,9 @@ import { PageHead, DemoBadge } from "@/components/mi/ui";
 export const Route = createFileRoute("/demo/reports")({
   head: () => ({
     meta: [
-      { title: "Reports — TechTar Intelligence" },
+      { title: "Reports — CallVibe" },
       { name: "description", content: "Scheduled and on-demand intelligence reports for Hayya applicant support operations." },
-      { property: "og:title", content: "Reports — TechTar Intelligence" },
+      { property: "og:title", content: "Reports — CallVibe" },
       { property: "og:description", content: "Operational and executive reporting for Hayya applicant support. Simulated demo data." },
     ],
   }),

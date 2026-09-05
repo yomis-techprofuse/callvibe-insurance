@@ -11,8 +11,8 @@ export const Route = createFileRoute("/demo/languages/$id")({
     return { language };
   },
   head: ({ loaderData }) => {
-    if (!loaderData) return { meta: [{ title: "Language unavailable — TechTar Intelligence" }, { name: "robots", content: "noindex" }] };
-    const t = `${loaderData.language.name} Support Intelligence — TechTar`;
+    if (!loaderData) return { meta: [{ title: "Language unavailable — CallVibe" }, { name: "robots", content: "noindex" }] };
+    const t = `${loaderData.language.name} Support Intelligence — CallVibe`;
     return {
       meta: [
         { title: t },
@@ -101,7 +101,7 @@ function LanguagePage() {
         </Panel>
       </div>
 
-      <InsightBanner label="TechTar Insight — Simulated Demo Insight" body={l.insight}>
+      <InsightBanner label="CallVibe Insight — Simulated Demo Insight" body={l.insight}>
         <div className="flex flex-wrap items-center gap-3">
           <Link to="/demo/resolution" className="inline-flex items-center gap-1 rounded-lg bg-primary px-3 py-1.5 text-[12px] font-semibold text-primary-foreground">
             Investigate Root Causes <ArrowRight className="h-3.5 w-3.5" />

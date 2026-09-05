@@ -1,5 +1,5 @@
 /**
- * TechTar Intelligence — global geography & language intelligence.
+ * CallVibe — global geography & language intelligence.
  * ALL FIGURES ARE SIMULATED / ILLUSTRATIVE DEMO DATA.
  */
 

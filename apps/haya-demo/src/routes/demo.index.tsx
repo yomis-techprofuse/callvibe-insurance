@@ -18,13 +18,13 @@ import {
 export const Route = createFileRoute("/demo/")({
   head: () => ({
     meta: [
-      { title: "Applicant Support Command Center — TechTar Intelligence" },
+      { title: "Applicant Support Command Center — CallVibe" },
       {
         name: "description",
         content:
           "Global applicant support intelligence for Hayya: operational health, emerging issues, conversation demand by market and language, contact drivers and root causes.",
       },
-      { property: "og:title", content: "Applicant Support Command Center — TechTar Intelligence" },
+      { property: "og:title", content: "Applicant Support Command Center — CallVibe" },
       { property: "og:description", content: "Global conversation intelligence for Hayya applicant support. Simulated demo data." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

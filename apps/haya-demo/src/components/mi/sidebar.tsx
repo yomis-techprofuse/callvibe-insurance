@@ -41,7 +41,7 @@ function Wordmark() {
     <Link to="/demo" className="flex items-center gap-2.5 px-4 py-4">
       <img
         src={`${import.meta.env.BASE_URL}favicon.png`}
-        alt="TechTar Intelligence"
+        alt="CallVibe"
         className="h-8 w-8 shrink-0 rounded-lg object-contain"
       />
       <span className="leading-tight">

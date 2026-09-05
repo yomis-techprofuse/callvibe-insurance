@@ -9,9 +9,9 @@ import { cn } from "@/lib/utils";
 export const Route = createFileRoute("/demo/resolution")({
   head: () => ({
     meta: [
-      { title: "Resolution Intelligence — TechTar Intelligence" },
+      { title: "Resolution Intelligence — CallVibe" },
       { name: "description", content: "First contact resolution, repeat contact and escalation by contact driver, with root-cause attribution for why applicants contact Hayya again." },
-      { property: "og:title", content: "Resolution Intelligence — TechTar Intelligence" },
+      { property: "og:title", content: "Resolution Intelligence — CallVibe" },
       { property: "og:description", content: "Understand what creates repeat contact, not just how much of it there is. Simulated demo data." },
     ],
   }),

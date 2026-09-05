@@ -15,9 +15,9 @@ export const Route = createFileRoute("/demo/conversations/")({
   validateSearch: zodValidator(searchSchema),
   head: () => ({
     meta: [
-      { title: "Conversations — TechTar Intelligence" },
+      { title: "Conversations — CallVibe" },
       { name: "description", content: "Classified applicant support conversations with contact driver, sub-driver, resolution, repeat contact, QA score and escalation risk." },
-      { property: "og:title", content: "Conversations — TechTar Intelligence" },
+      { property: "og:title", content: "Conversations — CallVibe" },
       { property: "og:description", content: "Every applicant conversation, classified and searchable. Simulated demo data." },
     ],
   }),
