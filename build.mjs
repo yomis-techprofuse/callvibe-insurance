@@ -3,6 +3,7 @@
 // a single top-level `.vercel/output` so this repo deploys as ONE Vercel project:
 //   /insurance/demo    -> apps/callvibe-insurance
 //   /travels/demo      -> apps/travel-demo
+//   /haya              -> apps/haya-demo (own /register, /login, /demo routes)
 // The bare domain root ("/") is intentionally unmatched and 404s.
 import { execFileSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from "node:fs";
@@ -15,6 +16,7 @@ const OUT = join(ROOT, ".vercel", "output");
 const apps = [
   { slug: "callvibe-insurance", segments: ["insurance", "demo"] },
   { slug: "travel-demo", segments: ["travels", "demo"] },
+  { slug: "haya-demo", segments: ["haya"] },
 ];
 
 function run(command, args, cwd, extraEnv = {}) {
